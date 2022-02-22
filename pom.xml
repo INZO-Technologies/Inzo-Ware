@@ -119,5 +119,10 @@
             <version>2.6</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>net.minecraftforge.fml</groupId>
+            <artifactId>minecraft-forge</artifactId>
+            <version>1.12.2</version>
+        </dependency>
     </dependencies>
 </project>

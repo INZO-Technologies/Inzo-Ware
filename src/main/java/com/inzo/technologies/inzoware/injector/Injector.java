@@ -15,6 +15,10 @@ import java.net.URL;
 import java.nio.file.*;
 import java.util.Map;
 
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+
 public class Injector {
 
     public static boolean patchFile(String orig, String out, SimpleConfig config, boolean override, boolean quiet) {
@@ -69,7 +73,7 @@ public class Injector {
         }
 
 
-        String name = (String) ("Client");
+        String name = (String) ("" + input.getFileName());
         String mainClass = (String) (config.MainClass);
 
         if(!quiet)
