@@ -48,7 +48,7 @@
                     <archive>
                         <manifest>
                             <mainClass>
-                                com.inzo.technologies.inzoware.injector.InjectorGUI
+                                com.inzo.technologies.inzoware.InjectorGUI
                             </mainClass>
                         </manifest>
                     </archive>

