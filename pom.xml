@@ -126,14 +126,16 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.13</version>
-        </dependency>
-        <dependency>
             <groupId>net.minecraftforge.fml</groupId>
             <artifactId>minecraft-forge</artifactId>
             <version>1.12.2</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

