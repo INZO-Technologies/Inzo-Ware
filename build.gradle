@@ -1,0 +1,93 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        maven {
+            url = uri('https://oss.sonatype.org/content/groups/public/')
+        }
+
+        maven {
+            url = uri('https://repo.maven.apache.org/maven2/')
+        }
+        maven {
+            name = 'forge'
+            url = 'https://files.minecraftforge.net/maven'
+        }
+        maven {
+            name = 'SpongePowered'
+            url = 'https://repo.spongepowered.org/maven'
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3.2'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+        classpath 'org.javassist:javassist:3.21.0-GA'
+        classpath 'org.yaml:snakeyaml:1.21'
+        classpath 'com.formdev:flatlaf:1.6.5'
+        classpath 'commons-lang:commons-lang:2.6'
+        classpath 'commons-io:commons-io:2.5'
+        classpath 'org.apache.httpcomponents:httpclient:4.5.13'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url = uri('https://oss.sonatype.org/content/groups/public/')
+    }
+
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+    maven {
+        name = 'forge'
+        url = 'https://files.minecraftforge.net/maven'
+    }
+}
+
+dependencies {
+    compile 'org.javassist:javassist:3.21.0-GA'
+    compile 'org.yaml:snakeyaml:1.21'
+    compile 'com.formdev:flatlaf:1.6.5'
+    compile 'commons-lang:commons-lang:2.6'
+    compile 'commons-io:commons-io:2.5'
+    compile 'org.apache.httpcomponents:httpclient:4.5.13'
+}
+
+group = 'com.inzo.technologies.inzoware.injector'
+version = '0.0.4'
+description = 'Injector'
+java.sourceCompatibility = JavaVersion.VERSION_1_8
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "com.inzo.technologies.inzoware.InjectorGUI"
+    }
+
+    from {
+// filters only existing and non-empty dirs
+        sourceSets.main.runtimeClasspath
+                .filter { (it.isDirectory() && it.listFiles().length > 0) || it.isFile() }
+                .collect { it.isDirectory() ? it : zipTree(it) }
+
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

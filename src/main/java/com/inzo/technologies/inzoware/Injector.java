@@ -1,6 +1,5 @@
 package com.inzo.technologies.inzoware;
 
-import javassist.ClassClassPath;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
@@ -13,10 +12,6 @@ import javassist.CannotCompileException;
 import javassist.CtField;
 import javassist.NotFoundException;
 
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class Injector {
 
@@ -161,8 +156,8 @@ public class Injector {
             CtMethod m = cc.getDeclaredMethod("init");
 
             if(!quiet)
-                System.out.println(" 'Client.Initialize();'  Has Been Added");
             m.insertAfter("{ com.inzo.technologies.inzoware.utils.Client.Initialize(); }");
+                System.out.println("[Injector] 'Client.Initialize();'  Has Been Added");
 
             //Write to temporary file
             cc.writeFile(temp.toString());
