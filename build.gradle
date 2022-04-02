@@ -1,0 +1,84 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "https://files.minecraftforge.net/maven" }
+        maven { url = "https://oss.sonatype.org/content/groups/public/" }
+        maven { url = "https://repo.maven.apache.org/maven2/" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+        classpath 'org.javassist:javassist:3.21.0-GA'
+        classpath 'org.yaml:snakeyaml:1.21'
+        classpath 'com.formdev:flatlaf:1.6.5'
+        classpath 'commons-lang:commons-lang:2.6'
+        classpath 'commons-io:commons-io:2.5'
+        classpath 'org.apache.httpcomponents:httpclient:4.5.13'
+    }
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'net.minecraftforge.gradle.forge'
+version = "2.11.1"
+group = "com.inzo.technologies" 
+archivesBaseName = "Inzo-Ware"
+
+sourceCompatibility = targetCompatibility = '1.8' 
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
+minecraft {
+    version = "1.12.2-14.23.5.2847"
+    runDir = "run"
+    mappings = "stable_39"
+}
+
+dependencies {
+    compile 'org.javassist:javassist:3.15.0-GA'
+    compile 'org.yaml:snakeyaml:1.21'
+    compile 'com.formdev:flatlaf:1.6.5'
+    compile 'commons-lang:commons-lang:2.6'
+    compile 'commons-io:commons-io:2.5'
+    compile 'org.apache.httpcomponents:httpclient:4.5.13'
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url = uri('https://oss.sonatype.org/content/groups/public/')
+    }
+
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+    jcenter()
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+
+jar {
+    manifest {
+        attributes "Main-Class": "com.inzo.technologies.inzoware.InjectorGUI"
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+build.dependsOn(shadowJar)

